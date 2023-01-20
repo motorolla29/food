@@ -125,6 +125,19 @@ function getZero(num) {
         }
     });
 
+    const modalTimerId = setTimeout(showModal, 5000);
+
+
+    window.addEventListener('scroll', showModalByScroll);
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.
+                documentElement.scrollHeight) {
+                    showModal();
+                    window.removeEventListener('scroll', showModalByScroll);
+            }
+    }
+
     function closeModal() {
         modal.classList.remove('show');
         modal.classList.add('hide');
