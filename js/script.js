@@ -244,21 +244,20 @@ function getZero(num) {
 
             const formData = new FormData(form);
 
-            /* const object = {};
+            const object = {};
 
             formData.forEach((value, key) => {
                 object[key] = value;
             });
 
-            const json = JSON.stringify(object); */
-
             fetch('server.php', {
                 method: "POST",
-                /* headers: {
+                headers: {
                     'Content-type': 'application/json'
-                }, */
-                body: formData
-            }).then(data => data.text())
+                },
+                body: JSON.stringify(object)
+            })
+            .then(data => data.text())
             .then(data => {
                 console.log(data);
                 showThanksModal(message.success); 
