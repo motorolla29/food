@@ -1,38 +1,38 @@
 'use strict';
 
-import {getResource} from "../services/services";
+import { getResource } from '../services/services';
 
 function cards() {
-    // Card class
+  // Card class
 
-    class MenuCard {
-        constructor(src, alt, title, descr, price, parentSelector, ...classes) {
-            this.src = src;
-            this.alt = alt;
-            this.title = title;
-            this.descr = descr;
-            this.price = price;
-            this.classes = classes;
-            this.parent = document.querySelector(parentSelector);
-            this.transfer = 27;
-            this.changeToUAH();
-        }
+  class MenuCard {
+    constructor(src, alt, title, descr, price, parentSelector, ...classes) {
+      this.src = src;
+      this.alt = alt;
+      this.title = title;
+      this.descr = descr;
+      this.price = price;
+      this.classes = classes;
+      this.parent = document.querySelector(parentSelector);
+      this.transfer = 27;
+      this.changeToUAH();
+    }
 
-        changeToUAH() {
-            this.price = this.price * this.transfer;
-        }
-        
-        render() {
-            const element = document.createElement('div');
+    changeToUAH() {
+      this.price = this.price * this.transfer;
+    }
 
-            if(this.classes.length === 0) {
-                this.element = 'menu__item';
-                element.classList.add(this.element);
-            } else {
-                this.classes.forEach(className => element.classList.add(className));
-            }
+    render() {
+      const element = document.createElement('div');
 
-            element.innerHTML = `
+      if (this.classes.length === 0) {
+        this.element = 'menu__item';
+        element.classList.add(this.element);
+      } else {
+        this.classes.forEach((className) => element.classList.add(className));
+      }
+
+      element.innerHTML = `
                 <img src=${this.src} alt=${this.alt}>
                 <h3 class="menu__item-subtitle">${this.title}</h3>
                 <div class="menu__item-descr">${this.descr}</div>
@@ -43,24 +43,30 @@ function cards() {
                 </div>
             `;
 
-        this.parent.append(element);
-        }
-    }  
+      this.parent.append(element);
+    }
+  }
 
+  getResource('https://vercel-json-server-m29.vercel.app/diet-food-menu').then(
+    (data) => {
+      data.forEach(({ img, altimg, title, descr, price }) => {
+        new MenuCard(
+          img,
+          altimg,
+          title,
+          descr,
+          price,
+          '.menu .container'
+        ).render();
+      });
+    }
+  );
 
-    getResource('http://localhost:3000/menu')
-        .then(data => {
-            data.forEach(({img, altimg, title, descr, price}) => {
-            new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-            });
-        });
-
-    // axios.get('http://localhost:3000/menu')
-    //     .then(data => {data.data.forEach(({img, altimg, title, descr, price}) => {
-    //         new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-    //         });
-    //     });
-    
+  // axios.get('http://localhost:3000/menu')
+  //     .then(data => {data.data.forEach(({img, altimg, title, descr, price}) => {
+  //         new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+  //         });
+  //     });
 }
 
 export default cards;

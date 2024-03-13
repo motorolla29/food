@@ -35,7 +35,10 @@ function forms(formSelector, modalTimerId) {
 
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-      postData('https://diet-food-m29.vercel.app/requests', json)
+      postData(
+        'http://vercel-json-server-m29.vercel.app/diet-food-requests',
+        json
+      )
         .then((data) => {
           console.log(data);
           showThanksModal(message.success);
