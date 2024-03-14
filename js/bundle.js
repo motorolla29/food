@@ -281,11 +281,10 @@ function forms(formSelector, modalTimerId) {
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
       (0,_services_services__WEBPACK_IMPORTED_MODULE_1__.postData)(
-        'http://vercel-json-server-m29.vercel.app/diet-food-requests',
+        'https://vercel-json-server-m29.vercel.app/diet-food-requests',
         json
       )
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           showThanksModal(message.success);
           statusMessage.remove();
         })
