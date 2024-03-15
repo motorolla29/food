@@ -10,6 +10,7 @@ import slider from './modules/slider';
 import { showModal } from './modules/modal';
 
 window.addEventListener('DOMContentLoaded', () => {
+  console.log('loaded');
   const modalTimerId = setTimeout(
     () => showModal('.modal', modalTimerId),
     50000
